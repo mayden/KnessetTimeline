@@ -86,7 +86,6 @@ header h3 {
 header span.little-title {
   text-decoration: underline;
   font-weight: bold;
-
 }
 header span.little-text {
   margin-right: 4px;
@@ -105,6 +104,10 @@ header p.stats {
   color: #fff9f9;
   width: 100%;
   margin: 0;
+}
+.cd-timeline-content p span.stage {
+  font-size: 12px;
+  font-style: italic;
 }
 .cd-timeline-block-error .cd-timeline-content {
   width: 100%;

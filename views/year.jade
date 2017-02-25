@@ -53,6 +53,9 @@ block content
               h2 #{event.title}
               p
                 | #{event.full_title}
+                br
+                span.stage שלב הצעת החוק: &nbsp;
+                span.stage=event.stage
             span.cd-date #{event.stage_date}
         else
           .cd-timeline-block-right

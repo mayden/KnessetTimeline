@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,6 +12,28 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/update-events', function(req, res, next) {
+  var db = req.db;
+  var events = db.get('events');
+
+
+  var objects = JSON.parse(fs.readFileSync('Events.json', 'utf8'));
+
+  events.insert(objects.Events, {ordered: true}, function (err, doc) {
+    if (err) {
+      // If it failed, return error
+      res.send("There was a problem adding the information to the database.");
+    }
+    else {
+      // And forward to success page
+      // res.send(doc);
+      res.send("OK");
+      //console.log(doc);
+    }
+  });
+
+});
+
 router.get('/year/:id', function(req, res, next) {
   var yearId = parseInt(req.params.id);
 
@@ -18,15 +41,25 @@ router.get('/year/:id', function(req, res, next) {
   var upperDate = yearId + "-12-31";
   var db = req.db;
   var events = db.get('events');
+  var findVars = {};
 
+  var stage = req.query.stage;
+  if(stage == 1)
+  {
+    findVars.stage = { $ne : "הצעה"};
+    console.log(stage);
+  }
+
+
+   findVars.stage_date = { $gte: lowerDate,  $lte: upperDate };
+
+  console.log(findVars);
   var options = {
     "sort": { "stage_date": -1 },
   };
 
 
-  var results = events.find({
-    'stage_date': { $gte: lowerDate,  $lte: upperDate }
-  }, options).then(function(result) {
+  var results = events.find(findVars, options).then(function(result) {
     res.render('year', {
       results: result,
       year: yearId,
