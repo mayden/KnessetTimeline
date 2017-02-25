@@ -1,6 +1,48 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  header
+    h1 מיני פרוייקט במדעי הרוח הדיגיטליים
+    p
+      span.little-title מטרת הפרוייקט
+      br
+      br
+      span.little-text
+        | פרוייקט זה הוקם על מנת להראות קשר בין אירועים במדינת ישראל לבין הצעות חוק שעולות במשכן הכנסת בחלוף השנים. בצד ימין ניתן לראות את האירועים, ומנגד לשים לב להצעות חוק שהועלו בצד השמאלי.
+        br
+        br
+        | פרוייקט זה קודם והוכן ע"י &nbsp;
+        strong אלכס ל. ואסף ע.  &nbsp;
+        | במסגרת קורס "מדעי הרוח הדיגיטליים", בהנחייתה של ד"ר יעל נצר. סמסטר א' 2017.
+    p
+      span.little-title מאחורי הקלעים
+      br
+      br
+      span.little-text
+        | האתר כתוב בשפת JavaScript ורץ על שרת Node.js
+        | כאשר כלל הצעות הכנסת, והאירועים שקרו במדינת ישראל בשנה הרלוונטית נשמרים במסד נתונים מסוג MongoDB.
+        |הנתונים נלקחו מאתר&nbsp;
+        a(href="https://oknesset.org", target="_blank") כנסת פתוחה
+        |   ומאתר ויקיפדיה.
+      br
+      br
+      |  האתר מבוסס על קוד פתוח ולכן אם ברצונכם לתרום, להוסיף, לשפר ולהעיר - הינכם מוזמנים לעשות זאת.
+    p
+      span.little-title מדעי הרוח הדיגיטליים
+      br
+      br
+      span.little-text
+        | מדעי הרוח הדיגיטליים (באנגלית: Digital Humanities) הם שדה מחקר, הוראה ויצירה, המצוי בממשק שבין מחשוב לבין תחומי מדעי הרוח השונים. מטרתם של מדעי הרוח הדיגיטליים היא להרחיב ואף להגדיר מחדש את המחקר המסורתי במדעי הרוח, על ידי שימוש בשיטות ובכלים דיגיטליים.
+  section#adding-event.cd-container
+    h1= message
+    h2= error.status
+    pre #{error.stack}
+
+
+
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+script(src='javascripts/main.js')
+script(src='javascripts/modernizr.js')
+
+  // Resource jQuery
+

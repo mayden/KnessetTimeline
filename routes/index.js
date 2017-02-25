@@ -21,18 +21,53 @@ router.get('/update-events', function(req, res, next) {
 
   events.insert(objects.Events, {ordered: true}, function (err, doc) {
     if (err) {
-      // If it failed, return error
       res.send("There was a problem adding the information to the database.");
     }
     else {
-      // And forward to success page
-      // res.send(doc);
+
       res.send("OK");
-      //console.log(doc);
     }
   });
 
 });
+
+router.get('/add-event', function(req, res, next) {
+  res.render('addevent', {
+  });
+});
+
+router.post('/add-event', function(req, res, next) {
+  var db = req.db;
+  var events = db.get('events');
+
+  var object = {
+    "stage_date": req.body.date,
+    "title": req.body.title,
+    "type": "event",
+    "description": req.body.desc,
+    "isEvent": "true"
+  };
+
+
+  events.insert(object, {ordered: true}, function (err, doc) {
+    if (err) {
+      console.log(err);
+      res.render('addevent', {
+        result: err
+      });
+    }
+    else {
+      console.log(doc);
+      res.render('addevent', {
+        result: doc
+      });
+    }
+  });
+
+
+});
+
+
 
 router.get('/year/:id', function(req, res, next) {
   var yearId = parseInt(req.params.id);
@@ -65,24 +100,7 @@ router.get('/year/:id', function(req, res, next) {
   });
 });
 
-/*
-router.get('/test', function(req, res, next) {
-  var db = req.db;
-  var events = db.get('events');
 
-  events.update({}, { $set: { type : "bill"}}, {multi: true}, function (err, doc) {
-    if (err) {
-
-      res.send("There was a problem adding the information to the database.");
-    }
-    else {
-
-      res.send(doc);
-
-    }
-  });
-});
-*/
 
 router.get('/updatedb', function(req, res, next) {
   var db = req.db;
