@@ -41,7 +41,11 @@ block content
       span.font-bold=results.length
       | &nbsp;רשומות במסד הנתונים
       | (אירועים והצעות חוק שהועלו)
-
+      | &nbsp;
+      if(!stage)
+        a(href="?stage=1").link-stage סנן הצעות חוק שהינם בשלב ה"הצעה"
+      else
+        a(href=path).link-stage כלול את כלל הצעות החוק
   section#cd-timeline.cd-container
     if(results.length)
       each event, i in results

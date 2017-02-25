@@ -47,13 +47,9 @@ router.get('/year/:id', function(req, res, next) {
   if(stage == 1)
   {
     findVars.stage = { $ne : "הצעה"};
-    console.log(stage);
   }
 
-
-   findVars.stage_date = { $gte: lowerDate,  $lte: upperDate };
-
-  console.log(findVars);
+  findVars.stage_date = { $gte: lowerDate,  $lte: upperDate };
   var options = {
     "sort": { "stage_date": -1 },
   };
@@ -63,6 +59,8 @@ router.get('/year/:id', function(req, res, next) {
     res.render('year', {
       results: result,
       year: yearId,
+      stage: stage,
+      path: req.path
     });
   });
 });
