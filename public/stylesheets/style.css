@@ -108,10 +108,8 @@ header p.stats {
 header a.link-stage {
   float: left;
   color: #fbf5f5;
-  text-size-adjust: initial;
-  font-size: large;
 }
-}
+
 
 .cd-timeline-content p span.stage {
   font-size: 12px;
