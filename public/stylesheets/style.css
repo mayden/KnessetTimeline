@@ -354,11 +354,11 @@ header p  {
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content span.cd-date {
   font-size: 13px;
   font-size: 0.8125rem;
-  position: absolute;
+
 }
 .cd-timeline-content .cd-read-more, .cd-timeline-content span.cd-date {
   display: inline-block;
-  position: absolute;
+
 }
 .cd-timeline-content p {
   margin: 1em 0;
