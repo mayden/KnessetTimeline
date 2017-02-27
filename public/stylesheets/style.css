@@ -441,7 +441,7 @@ header p  {
       height: 0;
       width: 0;
       border: 10px solid transparent;
-      border-right: 7px solid #97b0c3;
+      border-left: 7px solid #97b0c3;
   }
 
   .cd-timeline-block-right .cd-timeline-content .cd-read-more {
