@@ -110,6 +110,12 @@ header a.link-stage {
   color: #fbf5f5;
 }
 
+header select {
+  width: 130px;
+  display: block;
+  text-align: center;
+  margin: 5px auto;
+}
 
 .cd-timeline-content p span.stage {
   font-size: 12px;
@@ -172,6 +178,7 @@ header p  {
 
   header p.stats {
     width: 86%;
+    margin-top: -18px;
   }
 }
 
@@ -349,6 +356,9 @@ header p  {
   clear: both;
 }
 .cd-timeline-content h2 {
+  color: #303e49;
+}
+.cd-timeline-content h2 a {
   color: #303e49;
 }
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content span.cd-date {

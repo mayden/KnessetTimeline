@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var fs = require('fs');
+var json2csv = require('json2csv');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -78,26 +79,86 @@ router.get('/year/:id', function(req, res, next) {
   var events = db.get('events');
   var findVars = {};
 
-  var stage = req.query.stage;
-  if(stage == 1)
-  {
-    findVars.stage = { $ne : "הצעה"};
+  var stage = parseInt(req.query.stage);
+  var exportId = parseInt(req.query.export);
+
+  switch(stage) {
+    case 1:
+      findVars.stage =  "הצעה";
+      break;
+    case 2:
+      findVars.stage =  "בוועדה";
+      break;
+    case 3:
+      findVars.stage =  "קריאה ראשונה";
+      break;
+    case 4:
+      findVars.stage =  "נפלה בקריאה ראשונה";
+      break;
+    case 5:
+      findVars.stage =  "נפלה בקריאה שלישית";
+      break;
+    case 6:
+      findVars.stage =  "אושרה";
+      break;
+    case 7:
+      findVars.stage =  "לא ידוע";
+      break;
+    case 8:
+      findVars.stage =  "עברה קריאה טרומית";
+      break;
+    case 9:
+      findVars.stage =  "נפלה בקריאה טרומית";
+      break;
+    case 10:
+      findVars.stage =  "הוקפאה בכנסת קודמת";
+      break;
+    default:
+      findVars.stage =  { $ne: "" };
   }
 
+
+
   findVars.stage_date = { $gte: lowerDate,  $lte: upperDate };
+
   var options = {
     "sort": { "stage_date": -1 },
   };
 
 
-  var results = events.find(findVars, options).then(function(result) {
-    res.render('year', {
-      results: result,
-      year: yearId,
-      stage: stage,
-      path: req.path
+  if(exportId == 1)
+  {
+    var results = events.find(findVars, options).then(function(result){
+      res.send(JSON.stringify(result, null , ' '));
     });
-  });
+  }
+  else if(exportId == 2)
+  {
+    var results = events.find(findVars, options).then(function(result){
+
+      json2csv({ data: result}, function(err, csv) {
+        if (err) {
+          console.log(err);
+          res.statusCode = 500;
+          return res.end(err.message);
+        }
+        res.attachment('exported-data.csv');
+        res.end(csv);
+      });
+    });
+  }
+  else
+  {
+    var results = events.find(findVars, options).then(function(result) {
+      res.render('year', {
+        results: result,
+        year: yearId,
+        stage: stage,
+        path: req.path
+      });
+    });
+  }
+
 });
 
 
@@ -111,7 +172,7 @@ router.get('/updatedb', function(req, res, next) {
   request({
     url: apiUrl,
     json: true
-  }, function (error, response, apiData) {
+    }, function (error, response, apiData) {
     if (!error && response.statusCode === 200) {
       // Submit to the DB
       events.insert(apiData.objects, {ordered: true}, function (err, doc) {

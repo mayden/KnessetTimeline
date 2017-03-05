@@ -29,11 +29,31 @@ block content
       br
       |  האתר מבוסס על קוד פתוח ולכן אם ברצונכם לתרום, להוסיף, לשפר ולהעיר - הינכם מוזמנים לעשות זאת.
     p
-      span.little-title מדעי הרוח הדיגיטליים
+      span.little-title אפשרויות מתקדמות
       br
       br
       span.little-text
-        | מדעי הרוח הדיגיטליים (באנגלית: Digital Humanities) הם שדה מחקר, הוראה ויצירה, המצוי בממשק שבין מחשוב לבין תחומי מדעי הרוח השונים. מטרתם של מדעי הרוח הדיגיטליים היא להרחיב ואף להגדיר מחדש את המחקר המסורתי במדעי הרוח, על ידי שימוש בשיטות ובכלים דיגיטליים.
+        | סינון הצעות חוק שהם בשלב: &nbsp;
+        select#stageSelect
+          option(value="?stage=0" selected= stage==0) הכל
+          option(value="?stage=1" selected= stage==1) הצעה
+          option(value="?stage=2" selected= stage == 2) בוועדה
+          option(value="?stage=3" selected= stage == 3) קריאה ראשונה
+          option(value="?stage=4" selected= stage == 4) נפלה בקריאה ראשונה
+          option(value="?stage=5" selected= stage == 5) נפלה בקריאה שלישית
+          option(value="?stage=6" selected= stage == 6) אושרה
+          option(value="?stage=7" selected= stage == 7) לא ידוע
+          option(value="?stage=8" selected= stage == 8) עברה קריאה טרומית
+          option(value="?stage=9" selected= stage == 9) נפלה בקריאה טרומית
+          option(value="?stage=10" selected= stage == 10) הוקפאה בכנסת קודמת
+        br
+        br
+        | ייצא נתונים: &nbsp;
+        select#exportData
+          option(value="&export=0") בחר סוג מידע
+          option(value="&export=1") JSON
+          option(value="&export=2") CSV
+
     p.stats
       | שנת&nbsp;
       span.font-bold=year
@@ -42,10 +62,6 @@ block content
       | &nbsp;רשומות במסד הנתונים
       | (אירועים והצעות חוק שהועלו)
       | &nbsp;
-      if(!stage)
-        a(href="?stage=1").link-stage סנן הצעות חוק שהינם בשלב ה"הצעה"
-      else
-        a(href=path).link-stage כלול את כלל הצעות החוק
   section#cd-timeline.cd-container
     if(results.length)
       each event, i in results
@@ -54,7 +70,8 @@ block content
             .cd-timeline-img.cd-picture
               img(src='/images/icon-bill.png', alt='הצעת חוק')
             .cd-timeline-content
-              h2 #{event.title}
+              h2
+                a(href='https://oknesset.org' + event.absolute_url, target="_blank") #{event.title}
               p
                 | #{event.full_title}
                 br
@@ -76,8 +93,3 @@ block content
               p מצטערים, אך אין נתונים לשנה הזאת ו/או שהכנסת קלט שגוי. אנא נסה שנית במועד מאוחר יותר.
 
 
-script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-script(src='javascripts/main.js')
-script(src='javascripts/modernizr.js')
-
-    // Resource jQuery

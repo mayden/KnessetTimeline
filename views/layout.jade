@@ -4,6 +4,29 @@ html
     title הצעות הכנסת, אירועים ומה שבינהן
     link(rel='stylesheet', href='/stylesheets/reset.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    script(src="/javascripts/jquery.min.js", type="text/javascript")
   body
     block content
+    script(src='javascripts/main.js')
+    script(src='javascripts/modernizr.js')
+    script.
+      $(document).ready(function () {
+        // bind change event to select
+
+        $('#stageSelect').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+            window.location = url; // redirect
+          }
+          return false;
+        });
+
+        $('#exportData').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+            window.location = window.location.href  + url; // redirect
+          }
+          return false;
+        });
+      });
+      // Resource jQuery
