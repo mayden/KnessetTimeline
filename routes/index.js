@@ -82,6 +82,8 @@ router.get('/year/:id', function(req, res, next) {
   var stage = parseInt(req.query.stage);
   var exportId = parseInt(req.query.export);
 
+
+
   switch(stage) {
     case 1:
       findVars.stage =  "הצעה";
@@ -99,7 +101,7 @@ router.get('/year/:id', function(req, res, next) {
       findVars.stage =  "נפלה בקריאה שלישית";
       break;
     case 6:
-      findVars.stage =  "אושרה";
+      findVars = { $or: [ { "stage": "אושרה"  }, { "isEvent": "true" } ] };
       break;
     case 7:
       findVars.stage =  "לא ידוע";
