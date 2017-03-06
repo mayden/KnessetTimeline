@@ -86,39 +86,38 @@ router.get('/year/:id', function(req, res, next) {
 
   switch(stage) {
     case 1:
-      findVars.stage =  "הצעה";
+      findVars = { $or: [ { "stage": "הצעה"  }, { "isEvent": "true" } ] };
       break;
     case 2:
-      findVars.stage =  "בוועדה";
+      findVars = { $or: [ { "stage": "בוועדה"  }, { "isEvent": "true" } ] };
       break;
     case 3:
-      findVars.stage =  "קריאה ראשונה";
+      findVars = { $or: [ { "stage": "קריאה ראשונה"  }, { "isEvent": "true" } ] };
       break;
     case 4:
-      findVars.stage =  "נפלה בקריאה ראשונה";
+      findVars = { $or: [ { "stage": "נפלה בקריאה ראשונה"  }, { "isEvent": "true" } ] };
       break;
     case 5:
-      findVars.stage =  "נפלה בקריאה שלישית";
+      findVars = { $or: [ { "stage": "נפלה בקריאה שלישית"  }, { "isEvent": "true" } ] };
       break;
     case 6:
       findVars = { $or: [ { "stage": "אושרה"  }, { "isEvent": "true" } ] };
       break;
     case 7:
-      findVars.stage =  "לא ידוע";
+      findVars = { $or: [ { "stage": "לא ידוע"  }, { "isEvent": "true" } ] };
       break;
     case 8:
-      findVars.stage =  "עברה קריאה טרומית";
+      findVars = { $or: [ { "stage": "עברה קריאה טרומית"  }, { "isEvent": "true" } ] };
       break;
     case 9:
-      findVars.stage =  "נפלה בקריאה טרומית";
+      findVars = { $or: [ { "stage": "נפלה בקריאה טרומית"  }, { "isEvent": "true" } ] };
       break;
     case 10:
-      findVars.stage =  "הוקפאה בכנסת קודמת";
+      findVars = { $or: [ { "stage": "הוקפאה בכנסת קודמת"  }, { "isEvent": "true" } ] };
       break;
     default:
       break;
   }
-
 
 
   findVars.stage_date = { $gte: lowerDate,  $lte: upperDate };
