@@ -114,7 +114,7 @@ router.get('/year/:id', function(req, res, next) {
       findVars.stage =  "הוקפאה בכנסת קודמת";
       break;
     default:
-      findVars.stage =  { $ne: "" };
+      break;
   }
 
 
