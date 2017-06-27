@@ -8,11 +8,11 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 
 // Connection URL. This is where your mongodb server is running.
-var url = 'mongodb://testuser123:testuser123@ds163718.mlab.com:63718/heroku_3w93k9qp';
+var url = '';
 
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk(url);
+var db = monk(MONGODB_URI);
 
 var app = express();
 
